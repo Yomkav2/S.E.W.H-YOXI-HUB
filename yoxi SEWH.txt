@@ -1,3 +1,396 @@
 -- yomka made it
 
-local v0=game:GetService("Players");local v1=game:GetService("RunService");local v2=game:GetService("ReplicatedStorage");local v3=game:GetService("UserInputService");local v4=game:GetService("TweenService");local v5=game:GetService("Workspace");local v6=game:GetService("VirtualInputManager");local v7=game:GetService("GuiService");local v8=game:GetService("VirtualUser");local v9=v0.LocalPlayer;local v10=loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Yomkav2/Sugar-UI/refs/heads/main/Source"))();local v11=v10.Notification();v11.new({Title="THX FOR USING YOXI HUB",Description="Telegram: @YomkaMadeIt",Duration=5,Icon="bell-ring"});v11.new({Title="JOIN DISCORD SERVER",Description="https://discord.gg/PKdh229jqg",Duration=5,Icon="bell-ring"});local v12=v10.new({Title="YOXI HUB | S.E.W.H",Description="Made by: Yomka | Telegram - @YomkaMadeIt | https://discord.gg/PKdh229jqg",Keybind=Enum.KeyCode.C,Logo="http://www.roblox.com/asset/?id=82898985676372",ConfigFolder="YoxiHubConfigs"});local v13=v12:NewTab({Title="Info",Description="Information",Icon="info"});local v14=v12:NewTab({Title="Main",Description="Main Features",Icon="zap"});local v15=v12:NewTab({Title="Player",Description="Player Features",Icon="user"});local v16=v12:NewTab({Title="Misc",Description="Miscellaneous",Icon="settings"});local v17=v13:NewSection({Title="Information",Icon="circle-info",Position="Left"});v17:NewTitle("UI TOGGLE KEY - C");v17:NewTitle("Made by: Yomka");v17:NewTitle("Telegram: @YomkaMadeIt");v17:NewTitle("Discord: https://discord.gg/PKdh229jqg");v17:NewButton({Title="Join Telegram",Callback=function() setclipboard("https://t.me/YomkaMadeIt");v11.new({Title="Link Copied",Description="Telegram channel link copied!",Duration=5,Icon="link"});end});v17:NewButton({Title="Discord Server",Callback=function() setclipboard("https://discord.gg/PKdh229jqg");v11.new({Title="Link Copied",Description="Discord server link copied!",Duration=5,Icon="link"});end});local v18=v14:NewSection({Title="Main Features",Icon="gauge",Position="Left"});local v19;v18:NewButton({Title="Inf Stamina",Callback=function() local function v36() local v52=getgc or debug.getgc or getgarbagecollect ;local v53;for v60,v61 in pairs(v52(true)) do if ((type(v61)=="table") and rawget(v61,"reachedZero") and rawget(v61,"reachedFull")) then v53=v61;break;end end if v53 then local v67=v53.GetBaseFactor();v67.MaxStamina=99999;v67.DrainRate=0;v67.DrainRateMulti=0;pcall(function() debug.setupvalue(v53.Get,1,99999);end);v53.DrainStamina=function() end;v53.UpdateSprintState=function() end;end end v36();if v19 then v19:Disconnect();end v19=v9.CharacterAdded:Connect(v36);v11.new({Title="Inf Stamina Activated",Description="Stamina set to 99999 and infinite!",Duration=5,Icon="battery-full"});end});local v20=false;local v21=Vector3.new( -34.9,101.4, -473.03);local v22;v18:NewToggle({Title="Auto Afk Farm",Name="AutoAfkFarm",Default=false,Callback=function(v37) v20=v37;if v37 then if (v9.Character and v9.Character:FindFirstChild("HumanoidRootPart")) then v9.Character.HumanoidRootPart.CFrame=CFrame.new(v21);end v22=v1.Heartbeat:Connect(function() if (v9.Character and v9.Character:FindFirstChild("HumanoidRootPart")) then local v89=v9.Character.HumanoidRootPart.Position;if ((v89-v21).Magnitude>10) then v9.Character.HumanoidRootPart.CFrame=CFrame.new(v21);end end end);v11.new({Title="Auto Afk Farm Enabled",Description="Enjoy",Duration=5,Icon="tractor"});else if v22 then v22:Disconnect();end v11.new({Title="Auto Afk Farm Disabled",Description="Disabled",Duration=5,Icon="ban"});end end});local v23=false;local v24=nil;local v25={};local function v26(v38) for v54,v55 in pairs(v38:GetDescendants()) do if v55:IsA("ProximityPrompt") then return v55;end end return nil;end local function v27(v39) if  not v39 then return;end if (v9.Character and v9.Character:FindFirstChild("HumanoidRootPart")) then v9.Character.HumanoidRootPart.CFrame=CFrame.new(v39);end end v18:NewToggle({Title="Auto Farm Candy Doors",Name="AutoFarmCandyDoors",Default=false,Callback=function(v40) v23=v40;if v40 then v25=v25 or {} ;if (v9.Character and v9.Character:FindFirstChild("HumanoidRootPart")) then v9.Character.HumanoidRootPart.CFrame=CFrame.new(v21);end v24=task.spawn(function() while v23 do local v77=v5:FindFirstChild("Map") and v5.Map:FindFirstChild("Objects") and v5.Map.Objects ;if  not v77 then task.wait(1);continue;end local v78={};for v90,v91 in pairs(v77:GetChildren()) do if (v91 and (v91.Name=="HauntedDoor") and  not v25[v91]) then table.insert(v78,v91);end end if ( #v78==0) then task.wait(1);else for v99,v100 in ipairs(v78) do if  not v23 then break;end local v101;local v102=v100:FindFirstChild("Main");if v102 then local v107=v102:FindFirstChild("ProxAttachment");if (v107 and v107.WorldPosition) then v101=v107.WorldPosition;elseif (v107 and v107.Position) then if (v100.PrimaryPart and v100.PrimaryPart.Position) then v101=v100.PrimaryPart.Position + v107.Position ;else v101=v107.Position;end end end if  not v101 then local v108=v100:FindFirstChildOfClass("BasePart");if (v108 and v108.Position) then v101=v108.Position;end end if (v101 and v9.Character and v9.Character:FindFirstChild("HumanoidRootPart")) then local v109=v101 + Vector3.new(0,3,0) ;v9.Character.HumanoidRootPart.CFrame=CFrame.new(v109);task.wait(0.25);end local v103;if v102 then local v111=v102:FindFirstChild("ProxAttachment");if v111 then v103=v111:FindFirstChildOfClass("ProximityPrompt") or v111:FindFirstChild("ProximityPrompt") ;end end if  not v103 then v103=v26(v100);end if v103 then pcall(function() v103.HoldDuration=0;end);pcall(function() if v103.InputHoldBegin then v103:InputHoldBegin();task.wait(0.05);v103:InputHoldEnd();elseif v103.Trigger then v103:Trigger();end end);v25[v100]=true;end task.wait(2);if (v9.Character and v9.Character:FindFirstChild("HumanoidRootPart")) then v9.Character.HumanoidRootPart.CFrame=CFrame.new(v21);end task.wait(3);end end end end);v11.new({Title="Auto Farm Candy Doors Enabled",Description="Collecting haunted doors automatically.",Duration=5,Icon="ghost"});else v23=false;v11.new({Title="Auto Farm Candy Doors Disabled",Description="Disabled",Duration=5,Icon="ban"});end end});local v28=v15:NewSection({Title="Player Features",Icon="shield",Position="Left"});v28:NewToggle({Title="Anti Ragdoll",Name="AntiRagdoll",Default=false,Callback=function(v41) local v42=getgc or debug.getgc or getgarbagecollect ;local v43;for v56,v57 in pairs(v42(true)) do if ((type(v57)=="table") and (rawget(v57,"ragdolled")~=nil) and rawget(v57,"Ragdoll")) then v43=v57;break;end end if v43 then if v41 then v43.ragdolled=false;v43.Ragdoll=function(v92,v93,v94) if v93 then return;end v43.ragdolled=false;end;v11.new({Title="Anti Ragdoll Enabled",Description="You will never ragdoll!",Duration=5,Icon="shield"});else v11.new({Title="Anti Ragdoll Disabled",Description="Disabled",Duration=5,Icon="ban"});end else v11.new({Title="Error",Description="Failed to find ragdoll module",Duration=5,Icon="alert-triangle"});end end});local v29=false;local v30=1;local v31;v28:NewSlider({Title="Speed Multiplier",Name="SpeedMultiplier",Min=1,Max=10,Default=1,Callback=function(v44) v30=v44;if (v29 and v31) then v31.GetBaseFactor().Factors.Multiplier=v44;end end});v28:NewToggle({Title="Speed Boost",Name="SpeedBoost",Default=false,Callback=function(v45) v29=v45;local v46=getgc or debug.getgc or getgarbagecollect ;if  not v31 then for v73,v74 in pairs(v46(true)) do if ((type(v74)=="table") and rawget(v74,"IsSprinting") and rawget(v74,"GetBaseFactor")) then v31=v74;break;end end end if v31 then local v64=v31.GetBaseFactor();if v45 then v64.Factors.Multiplier=v30;v11.new({Title="Speed Boost Enabled",Description="Sprint speed boosted!",Duration=5,Icon="zap"});else v64.Factors.Multiplier=1;v11.new({Title="Speed Boost Disabled",Description="Disabled",Duration=5,Icon="ban"});end else v11.new({Title="Error",Description="Failed to find sprint module",Duration=5,Icon="alert-triangle"});end end});local v32=false;local v33;if  not v33 then v33=v3.JumpRequest:Connect(function() if (v32 and v9.Character and v9.Character:FindFirstChildOfClass("Humanoid")) then v9.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping");end end);end v28:NewToggle({Title="Inf Jump",Name="InfJump",Default=false,Callback=function(v47) v32=v47;v11.new({Title=(v47 and "Inf Jump Enabled") or "Inf Jump Disabled" ,Description=(v47 and "Infinite jumping enabled!") or "Disabled" ,Duration=5,Icon=(v47 and "arrow-up") or "ban" });end});v28:NewToggle({Title="No Ragdoll Dmg etc",Name="NoRagdollDmg",Default=false,Callback=function(v48) local v49=getgc or debug.getgc or getgarbagecollect ;local v50;for v58,v59 in pairs(v49(true)) do if ((type(v59)=="table") and rawget(v59,"Fall") and rawget(v59,"Ragdoll") and rawget(v59,"Bounce")) then v50=v59;break;end end if v50 then if v48 then v50.Fall=function() end;v50.Ragdoll=function() end;v50.Bounce=function(v96,v97) if v50._u_37 then v50._u_37.AssemblyLinearVelocity=(v50._u_37.AssemblyLinearVelocity * Vector3.new(1,0,1)) + (Vector3.new(0,1,0) * v96) ;end end;v11.new({Title="No Ragdoll Dmg Enabled",Description="No damage from falls, etc.!",Duration=5,Icon="heart"});else v11.new({Title="No Ragdoll Dmg Disabled",Description="Disabled",Duration=5,Icon="ban"});end else v11.new({Title="Error",Description="Failed to find trauma module",Duration=5,Icon="alert-triangle"});end end});local v34=v16:NewSection({Title="Misc Features",Icon="wrench",Position="Left"});v34:NewButton({Title="Teleport Lobby",Callback=function() if (v9.Character and v9.Character:FindFirstChild("HumanoidRootPart")) then v9.Character.HumanoidRootPart.CFrame=CFrame.new(Vector3.new( -34.9,101.4, -473.03));end v11.new({Title="Teleported",Description="Teleported to Lobby!",Duration=5,Icon="map-pin"});end});v34:NewButton({Title="Teleport to Top Height",Callback=function() if (v9.Character and v9.Character:FindFirstChild("HumanoidRootPart")) then v9.Character.HumanoidRootPart.CFrame=CFrame.new(v5.Map.TopHeight.Position);end v11.new({Title="Teleported",Description="Teleported to Top Height!",Duration=5,Icon="arrow-up"});end});v34:NewButton({Title="Anti Afk",Callback=function() v9.Idled:Connect(function() v8:CaptureController();v8:ClickButton2(Vector2.new());end);v11.new({Title="Anti Afk Activated",Description="Anti-AFK enabled!",Duration=5,Icon="clock"});end});local v35=false;v34:NewToggle({Title="Anti Game Afk",Name="AntiGameAfk",Default=false,Callback=function(v51) v35=v51;if v51 then task.spawn(function() while v35 do local v86=v9.Character;local v87=v86 and v86:FindFirstChild("HumanoidRootPart") ;local v88=v86 and v86:FindFirstChildOfClass("Humanoid") ;if (v87 and v88) then pcall(function() local v105=v5.CurrentCamera;local v106=Vector3.new(0,0, -1);if (v105 and v105.CFrame) then v106=Vector3.new(v105.CFrame.LookVector.X,0,v105.CFrame.LookVector.Z).Unit;end v88:Move(v106,true);v88:ChangeState(Enum.HumanoidStateType.Running);pcall(function() if (v6 and v6.SendKeyEvent) then v6:SendKeyEvent(true,Enum.KeyCode.W,false,game);end end);task.wait(0.5);v88:Move(Vector3.new(0,0,0),true);pcall(function() if (v6 and v6.SendKeyEvent) then v6:SendKeyEvent(false,Enum.KeyCode.W,false,game);end end);end);end task.wait(4);end end);v11.new({Title="Anti Game Afk Enabled",Description="No more AFK in game",Duration=5,Icon="shield-check"});else v11.new({Title="Anti Game Afk Disabled",Description="Disabled",Duration=5,Icon="ban"});end end});
+local s_=(getfenv())
+local Ia,Ma,I=(string.char),(string.byte),(bit32 .bxor)
+local a_=function(p,ga)
+    local ub=''
+    for n_=-0.001479153184801701*-32451,(#p-(-13180+13181))+-0.0027417604386816702*-17507 do
+        ub=ub..Ia(I(Ma(p,(n_-(-8781- -8829))+-769/-769),Ma(ga,(n_-(4507+-4459))%#ga+5454/5454)))
+    end
+    return ub
+end
+local la,Rb=(string.gsub),(string.char)
+local ba=(function(ta)
+    ta=la(ta,'[^ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=]','')
+    return(ta:gsub('.',function(i_)
+        if(i_=='=')then
+            return''
+        end
+        local r_,pb='',(('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'):find(i_)-1)
+        for Ya=6,1,-1 do
+            r_=r_..(pb%2^Ya-pb%2^(Ya-1)>0 and'1'or'0')
+        end
+        return r_
+    end):gsub('%d%d%d?%d?%d?%d?%d?%d?',function(Ga)
+        if(#Ga~=8)then
+            return''
+        end
+        local ea=0
+        for Fb=1,8 do
+            ea=ea+(Ga:sub(Fb,Fb)=='1'and 2^(8-Fb)or 0)
+        end
+        return Rb(ea)
+    end))
+end)
+return(function(C,...)
+    local function K(U)
+        return C[U+34.504854368932037*206]
+    end
+    local v,Na,xa,Ea,Ja,ob,wb,Pb,P=s_[a_('\166\145\172\149','\193\240')]:GetService(K(0.92409120951751489*-30260)),s_[a_('\31\236\21\232','x\141')]:GetService(K(16824+-20192)),s_[a_('\160\207\170\203','\199\174')]:GetService(a_('\225\229\240e\127@\167\175\214\228\211}yQ\167\188\214','\179\128\128\t\22#\198\219')),s_[a_('\240\127\250{','\151\30')]:GetService(K(1.0799486568258916*10907)),s_[a_('\187r\177v','\220\19')]:GetService(a_('\186R\t\219\134t\139W\26\215\139B',"\238%l\190\232\'")),s_[a_('@\180J\176',"\'\213")]:GetService(K(-50999895/-2655)),s_[a_('\158C\148G','\249\"')]:GetService(a_('2zOc\191j\200\1\148\20fIZ\171e\197/\159\22','d\19=\23\202\v\164H\250')),s_[a_('\164\196\174\192','\195\165')]:GetService(K(0.12978201241518694*13854)),s_[a_('\214\185\220\189','\177\216')]:GetService(K(14.236349453978159*-2564))
+    local w_,ab=v[a_('\236\232\26\a\6\240\235\24\31\15\210','\160\135yfj')],s_[a_('*\231\195\182\252\50\250\203\188\232','F\136\162\210\143')](s_[a_('\2\205\b\201','e\172')]:HttpGetAsync(a_(ba'NtAM4H1iuGWVIuZb9e7YIZ2UhgaL759rS4BoI3t4XCmkVh9TM88Z5jx3xD+AIuNYx86DO42QgFqG+J1gVttgLGY4EBWmDDRfOw==',ba'XqR4kA5Yl0rnQ5F1koesSej283XunfwEJfQNTQ9WP0bJeUY8')))()
+    local t_=ab[a_('\b\225\152\216\193@%\239\152\216\200G','F\142\236\177\167)')]();
+    t_[a_('\214\221\207','\184')]{[K(-1331839/659)]=a_('!n\194\176JE\247\196\216Dk;a\186\201CR\236\196\197B\96','u&\154\144\f\n\165\228\141\23\"'),[a_('(d\137|\215\5q\142v\202\2','l\1\250\31\165')]=K(178708794/25149),[K(17998+-28603)]=K(12178+-9913),[a_('\127\"Y/','6A')]=a_('KH\228Y\4_\225[N',')-\136\53')};
+    t_[a_('\144\155\137','\254')]{[K(0.71520371889526935*7314)]=K(-362721280/11392),[K(7111+-19076)]=K(243830898/-6966),[a_('k\221\198\235[\193\219\228','/\168\180\138')]=-0.00026642510790216868*-18767,[K(-27239-6413)]=K(-1.9662307692307692*-13000)}
+    local m=ab[a_('\254\245\231','\144')]{[a_('\233\192\201\197\216','\189\169')]=K(13360+-16510),[K(-0.78686317824106033*28972)]=a_(ba'IyWm2QU1v+of2fQlKT3U7D2ElYLV/mMbhcahFeaiAgiuSH/zCiGLyAUr5rhL9Os7eHPb9HSjk4HC/T8dj8ncfsKTX1f8Q0P1',ba'bkTCvCVXxtA/gJtIQlz0kB3Q8O6wmRF66OaMNab7bWXFKTKS'),[a_('\146\56\131\187\52\148\189','\217]\250')]=s_[a_('\28\55,4','YY')][a_('\6~,\14t1(','M\27U')][a_('\163','\224')],[K(-1.5120192307692308*-9152)]=K(-4976+-31639),[K(38962-19058)]=a_('\138;\184\240\183Zl\144;\174\255\150H}','\211T\192\153\255/\14')}
+    local va,j,wa,lb=m:NewTab{[a_('h\181H\176Y','<\220')]=K(-4507- -15757),[a_('L\27\188X\157a\14\187R\128f','\b~\207;\239')]=a_('\207\188\188\179\223\235\179\174\181\194\232','\134\210\218\220\173'),[K(-25988+19948)]=a_('/\239 \238','F\129')},m:NewTab{[K(-29274+-4042)]=K(-44261+18831),[K(1.005013229355243*-21543)]=K(0.73726352146950314*25478),[K(196923144/17974)]=a_('\160\187\170','\218')},m:NewTab{[K(12248-21604)]=a_('\217\153\195\240\144\208','\137\245\162'),[a_('S\157\218N1~\136\221D,y','\23\248\169-C')]=K(-1.6673707680572669*17043),[a_('J\216l\213','\3\187')]=K(-201187712/-15136)},m:NewTab{[K(1.4354738154613467*-3208)]=a_('\162\128\156\138','\239\233'),[K(0.74652724774843537*13102)]=a_('\245\137l\144{1\212\129q\150q(\203','\184\224\31\243\30]'),[K(234154/4418)]=a_('\203\235[\149\209\224H\146','\184\142/\225')}
+    local ia=va:NewSection{[K(2224+-22779)]=K(-80710344/-16731),[a_('o\136I\133','&\235')]=K(16766-15713),[a_('\198\234j\253\226\236v\250','\150\133\25\148')]=K(691500357/31041)};
+    ia:NewTitle(K(628232892/-17801));
+    ia:NewTitle(K(-0.45878039367039752*25910));
+    ia:NewTitle(a_('@\161\199\179\255\57Xh}2\192M\171\198\189\249\6Xa\"[\244','\20\196\171\214\152K9\5G\18\128'));
+    ia:NewTitle(K(2072+-627));
+    ia:NewButton{[K(-36943106/-1978)]=a_('\20\215G^\217H;\212KW\139}3','^\184.0\249\28'),[K(-178690407/-9849)]=function()
+        return(function(Da)
+            local function Ta(R)
+                return Da[R-(-9386+-18752)]
+            end
+            s_[a_('\205\243\203g\243b\206\244\208e\237o','\190\150\191\4\159\v')](a_('\253K\173\166N\158\189\246R\211\250\212\186f\182\187V\197\223\184B\152\222\197','\149?\217\214=\164\146\217&\253\151\177'));
+            t_[a_('\226\233\251','\140')]{[a_('\168\191\136\186\153','\252\214')]=a_('\208W\157\22\218\223Q\131\20\159\248','\156>\243}\250'),[a_('^\205\25\135\186s\216\30\141\167t','\26\168j\228\200')]=Ta(961047720/-22536),[a_('\183\20\158U\135\b\131Z','\243a\236\52')]=0.00020896021397525912*23928,[a_('\251\225\221\236','\178\130')]=Ta(21659604/-1381)}
+        end){[-8217+-6290]=a_('\217\246\169\211\169\186\207\25\191C\225\220p\167\232\255\229\218\167\166\197T\252O\249\212{\173\172','\141\147\197\182\206\200\174t\159 \137\189\30\201'),[-12644+25098]=a_('\rv\15t','a\31')}
+    end};
+    ia:NewButton{[K(35909-28110)]=a_('\182n\210\210h\192!\210T\196\195q\215\55','\242\a\161\177\a\178E'),[a_('\137wm>\168wb9','\202\22\1R')]=function()
+        return(function(X)
+            local function Fa(qa)
+                return X[qa+(4551+8413)]
+            end
+            s_[a_('{d\139\248\234\216xc\144\250\244\213','\b\1\255\155\134\177')](Fa(-0.89795318773871313*10211));
+            t_[a_('\1\n\24','o')]{[Fa(10985+3903)]=a_("\1[}\194b\14]c\192\')",'M2\19\169B'),[a_('\228\137Q|\136\201\156Vv\149\206','\160\236\"\31\250')]=a_('S\246\129{\243\221\18\204\249\205\177\133De\191\158q\242\196V\143\229\216\170\150E6','\23\159\242\24\156\175v\236\138\168\195\243!'),[Fa(-8754-31890)]=-31360+31365,[a_('\17\28\55\17','X\127')]=Fa(17509-31277)}
+        end){[-100484010/-26478]=a_('\f\235\57\157\155V\169\144\175\30\231\130\239L\0\177*\138\199<\205\219\163E\166\216\234O\3','d\159M\237\232l\134\191\203w\148\225\128>'),[-18826-8854]=a_('9\174S|\t\178Ns','}\219!\29'),[25236+-26040]=a_(' ^\"\\','L7'),[14190- -13662]=a_('\132p\164u\181','\208\25')}
+    end}
+    local M=j:NewSection{[a_('\16\139\48\142!','D\226')]=K(43814+-21555),[a_('\170\138\140\135','\227\233')]=K(1139- -16496),[a_('\235\145\214C\207\151\202D','\187\254\165*')]=a_('\213\48\255!','\153U')}
+    local d_;
+    M:NewButton{[K(-972723708/31658)]=K(-43374+32431),[K(-56007852/1983)]=function()
+        return(function(J)
+            local function eb(Q)
+                return J[Q+8476857/-1321]
+            end
+            local function qb()
+                return(function(Db)
+                    local function e_(o_)
+                        return Db[o_+(1381- -22893)]
+                    end
+                    local za=s_[a_('\180C\167A\176','\211&')]or s_[a_('\227)\229\57\224','\135L')][a_('\199\230\212\228\195','\160\131')]or s_[a_('\178\130\181=\188yu\249\178\130\162\53\177gr\251\161','\213\231\193Z\221\v\23\152')]
+                    local Ib
+                    for Ra,Sa in s_[a_('\225\53\248&\226','\145T')](za(true))do
+                        if not(s_[a_("#>\'\"",'WG')](Sa)==e_(3545+-16830)and s_[a_('5\133\251 \129\248','G\228\140')](Sa,a_('\n\178\f\170\164\29\179\55\172\190\23','x\215m\201\204'))and s_[a_('\170*\15\191.\f','\216Kx')](Sa,e_(-3.9057324840764331*7065)))then
+                        else
+                            Ib=Sa
+                            break
+                        end
+                    end
+                    if not(Ib)then
+                    else
+                        local g=Ib[a_('\154\131\167\174\179?\184\160\178\143\166#\175','\221\230\211\236\210L')]();
+                        g[a_('\a#\b?C+/\25\2V','JBpl7')]=2660573394/26606;
+                        g[a_("\19\a\217\27\57\'\217\6\50",'Wu\184r')]=0;
+                        g[a_('0E\29\184,\138\190\0R1\164.\172\182','t7|\209B\216\223')]=0;
+                        s_[a_('\3\25\18\22\31','sz')](function()
+                            return(function(Xa)
+                                local function ib(Sb)
+                                    return Xa[Sb+(-26617- -29325)]
+                                end
+                                s_[a_('\23\188\17\172\20','s\217')][a_(".\158\220\143\50+\154\196\143\'",']\251\168\250B')](Ib[a_('\180\150\135','\243')],-2350- -2351,ib(3392-11982))
+                            end){[0.28282925421935856*-20797]=103047-3048}
+                        end);
+                        Ib[a_('\136w\25\254\51\189\184d\21\254\51\143','\204\5x\151]\238')]=function()
+                        end;
+                        Ib[a_('\248\193\194\14\24Mc\221\223\216\200\27?\\Q\217\200','\173\177\166ol(0\173')]=function()
+                        end
+                    end
+                end){[-201197601/-18309]=a_('\21\133\3\136\4','a\228'),[-14649- -11329]=a_('w\224\96\195\4\96\225G\213\0i','\5\133\1\160l')}
+            end
+            qb()
+            if not(d_)then
+            else
+                d_:Disconnect()
+            end
+            d_=w_[a_('\a\136\203\174\231\156\225!\146\235\184\226\154\241','D\224\170\220\134\255\149')]:Connect(qb);
+            t_[a_('V]O','8')]{[eb(-923812/-43)]=eb(2461+24822),[a_('\16>/\30\131=+(\20\158:','T[\\}\241')]=a_('&\185\154v>^\212\227K{\206\212]#T\19\254L\244\194;6^\209\227Qp\220\157G%\0O\230','u\205\251\27W0\181\195\56\30\186\244)Lt*\199'),[eb(4745+-19776)]=eb(-586828831/-16123),[eb(-1.2551949985114617*-16795)]=a_('P\223Kl\166NK\147Ym\175P','2\190?\24\195<')}
+        end){[0.92495234717850972*22559]=a_("\180\149\151;|\235\212+\147\197\156\219\176x[\246\195\'\142\206\153",'\253\251\241\27/\159\181F\250\171'),[4.2370604504148561*-5062]=a_('U\201\200ze\213\213u','\17\188\186\27'),[125157240/8535]=a_('d\202B\199','-\169'),[262060331/17393]=a_('%\234\5\239\20','q\131'),[39339-9359]=18772+-18767}
+    end}
+    local Ua,E,G=false,s_[a_('*\240\168\b\250\185O','|\149\203')][a_('\178\185\171','\220')](K(-11497- -10443),0.012540326671401035*29571,K(10226+-25867)),s_[a_('s\221\19\21[\221\3\4',':\179\96a')][a_('\233\226\240','\135')](a_('\231z\197o','\183\27'));
+    G[a_('\167\236\142\224','\244\133')]=s_[a_('*\127\178\bu\163O','|\26\209')][a_('jas','\4')](K(32796-10398),K(0.026592577892438976*25195),27711-27701);
+    G[a_('@#\172<d%\176;','\16L\223U')]=s_[a_('\247]\237\213W\252\146','\161\56\142')][a_('83!','V')](K(-51306- -14882),K(37011-17118),840930.6399999999/-3188);
+    G[a_('\131:mm\173&ka','\194T\14\5')]=K(-29006-6371);
+    G[a_('P1H\150\27\127<O\177\17','\19P&\213t')]=K(-431150352/-20238);
+    G[a_('\"$3\23+5','rEA')]=ob
+    local gb;
+    M:NewToggle{[a_('t\fT\tE',' e')]=K(-6.8372881355932202*2950),[a_('\185\148\154\144','\247\245')]=a_('\200\234\a\247\4\239\244\53\249\55\228','\137\159s\152E'),[a_('\172%h\137\53b\156','\232@\14')]=false,[K(-66351+26888)]=function(D)
+        return(function(pa)
+            local function _a(Ob)
+                return pa[Ob+(-8328-358)]
+            end
+            Ua=D
+            if not(D)then
+                if not(gb)then
+                else
+                    gb:Disconnect()
+                end
+                t_[a_('v}o','\24')]{[a_('\149$\181!\164','\193M')]=a_('\4\207\166\230{=5G\234\19\151\55\215\242\205\50\15\50N\166\48\146','E\186\210\137[|S,\202U\246'),[_a(26142-13191)]=a_('\152\223Z#\190\218L&','\220\182)B'),[_a(0.64014296463506393*-15948)]=_a(16865-30158),[a_('?\174\25\163','v\205')]=a_('/,#','M')}
+            else
+                if not(w_[a_('\28\185w\0>\178b\23-','_\209\22r')]and w_[a_('\206\168\147\249\236\163\134\238\255','\141\192\242\139')]:FindFirstChild(_a(61799+-28349)))then
+                else
+                    w_[a_('v\241\142\250T\250\155\237G','5\153\239\136')][a_('\174\189\134N\169(\127h\180\167\132[\151&dx','\230\200\235/\199G\22\f')][a_('\196)L\230\2[','\135o>')]=s_[a_('W\218su\241d','\20\156\1')][a_('\209\218\200','\191')](E)
+                end
+                gb=Na[a_('\222\54\28Z\226\49\24I\226','\150S}(')]:Connect(function()
+                    return(function(Cb)
+                        local function ca(Ab)
+                            return Cb[Ab+(4802+24241)]
+                        end
+                        if not(w_[a_('u\179A\30W\184T\tD','6\219 l')]and w_[a_('\144\175vI\178\164c^\161','\211\199\23;')]:FindFirstChild(ca(-9663+-28760)))then
+                        else
+                            local cb=w_[a_('(z\157\53\nq\136\"\25','k\18\252G')][a_('\165\253q8\232;(\197\191\231s-\214\53\51\213','\237\136\28Y\134TA\161')][a_('\18=\223\254\54;\195\249','BR\172\151')]
+                            if not((cb-E)[a_('j_ngNJ|mB',"\'>\t\t")]>ca(-7589-13149))then
+                            else
+                                w_[a_("%\150\50\233\a\157\'\254\20",'f\254S\155')][a_('\26\153L\171\b\24\183\18\0\131N\190\54\22\172\2','R\236!\202fw\222v')][a_('\165\128u\135\171b','\230\198\a')]=s_[a_('\231\179\18\197\152\5','\164\245\96')][a_('NEW',' ')](E)
+                            end
+                        end
+                    end){[207791100/25020]=219370/21937,[-19996- -10616]=a_('anqI\174\130_2{ts\\\144\140D\"',')\27\28(\192\237\54V')}
+                end);
+                t_[a_('\27\16\2','u')]{[a_('\172b\140g\157','\248\v')]=_a(0.11568533588638902*31335),[_a(-14.676534296028882*-2770)]=_a(-24809+4299),[_a(-0.15061712726465082*31517)]=_a(-452082798/-19758),[_a(17359-21336)]=a_('\15\237\217\24\235\215\t','{\159\184')}
+            end
+        end){[0.95078750062899409*-19873]=a_('CU\147\188sI\142\179','\a \225\221'),[638720892/-21877]=a_('\243\209\220\208\207','\182\191'),[0.62423043095866315*22740]=-0.0010645092612305727*-4697,[0.15568954379056818*-32507]=a_('\96f\166!\233\rm\14\244\b@a\191n\140\"j\a\184+E','!\19\210N\201L\ve\212N'),[-26029+4050]=28030/5606,[-0.1661407814265124*-25671]=a_('6(G\175#\27=@\165>\28','rM4\204Q'),[14933- -9831]=a_('\161P\201\174*\192\143S\187J\203\187\20\206\148C','\233%\164\207D\175\230\55'),[-317- -32285]=a_('\173(k\140\t\128=l\134\20\135','\233M\24\239{'),[-0.61284730142798483*21919]=a_('2\nO3\2\22R<','v\127=R'),[2.0316059682335954*-6233]=a_('\169>\143\51','\224]')}
+    end}
+    local H=wa:NewSection{[K(14111- -4355)]=K(-52482+16651),[a_('\30\249\56\244','W\154')]=a_('\204\168\135\218\172\138','\191\192\238'),[K(-64024- -29219)]=K(-65719+30853)};
+    H:NewToggle{[a_(':\250\26\255\v','n\147')]=a_('\0\255\230_\aG \246\246YKy',"A\145\146\54\'\21"),[K(-0.30614857331626544*24217)]=a_('\136\145\254\50\161\168\152\238\52\159\165','\201\255\138[\243'),[a_('\26u\234?e\224*','^\16\140')]=false,[a_('\128\187\157\196\161\187\146\195','\195\218\241\168')]=function(Kb)
+        return(function(Oa)
+            local function Eb(fb)
+                return Oa[fb-522287460/-22410]
+            end
+            local y=s_[a_('~hmjz','\25\r')]or s_[a_(',\228*\244/','H\129')][a_('\246(\229*\242','\145M')]or s_[a_('\134\221P\249\164[*\n\134\221G\241\169E-\b\149','\225\184$\158\197)Hk')]
+            local Ca
+            for ra,bb in s_[a_('\191x\166k\188','\207\25')](y(Eb(-25568+-23240)))do
+                if not(s_[a_('\0/\4\51','tV')](bb)==Eb(-1.6756879346840037*26456)and s_[a_('\194\4\191\215\0\188','\176e\200')](bb,Eb(-60558+28582))~=Eb(-22604+-25653)and s_[a_('qvPdrS',"\3\23\'")](bb,Eb(-0.48229718427655421*10761)))then
+                else
+                    Ca=bb
+                    break
+                end
+            end
+            if not(Ca)then
+                t_[a_('\130\137\155','\236')]{[a_(']_}Zl','\t\54')]=a_('-\96\26}\26','h\18'),[a_('\214\230f\3\207\251\243a\t\210\252','\146\131\21\96\189')]=Eb(-0.67869837663527433*27289),[a_('\221\231\172\144\237\251\177\159','\153\146\222\241')]=-24688+24693,[Eb(-16657+22862)]=a_('V|\185u\228\25\22Ey\189i\247X\a','7\16\220\a\144\52b')}
+            else
+                if not(Kb)then
+                    t_[a_('92 ','W')]{[a_('\253\145\221\148\204','\169\248')]=Eb(-32204+-9557),[Eb(-0.62570767881349176*12541)]=a_('\219\242\236\185\253\247\250\188','\159\155\159\216'),[a_('\140\252\219\165\188\224\198\170','\200\137\169\196')]=Eb(-1.0269526952695269*12726),[Eb(50838140/9820)]=a_('\177\178\189','\211')}
+                else
+                    Ca[a_('VM\27\17K@\16\16@','$,|u')]=Eb(26077+-26379);
+                    Ca[a_('Q;ug5~o','\3Z\18')]=function(Y,h,Qb)
+                        if h then
+                            return
+                        end
+                        Ca[a_('\229\181/\187\248\184$\186\243','\151\212H\223')]=false
+                    end;
+                    t_[a_('T_M',':')]{[Eb(-6722+-21044)]=a_('\202\216\t\27q\181\243\206\195\162\231\218]7?\134\240\197\194\169','\139\182}rQ\231\146\169\167\205'),[Eb(-32888800/-23492)]=Eb(873718092/-27556),[a_('\3\168%\17\51\180\56\30','G\221Wp')]=-23114+23119,[Eb(-60917- -24413)]=a_('\147\239\145\133\235\156','\224\135\248')}
+                end
+            end
+        end){[-46644- -21693]=nil,[-164978838/19638]=a_('\200\235\143\54\23\222\209\252e\173J\231\225\136\54\18\214\218\244*\175C\176','\145\132\250\22\96\183\189\144E\195/'),[1201+28310]=a_('\185\193\159\204','\240\162'),[-0.31929801147737891*-14986]=a_('\25\253\140)\197T\159\173\217\182\244\244\174\127\127\238\132\"\196_\211\181\150\251\253\249\181w:','_\156\229E\160\48\191\217\182\150\146\157\192\27'),[-8094+-576]=a_('5\131\166\184(\142\173\185#','G\226\193\220'),[12311+16172]=a_('xb^o','1\1'),[-70389612/-6876]=146080/29216,[-28639+3137]=true,[1.1068129330254042*20784]=false,[19301+-23761]=a_('\6\238&\235\55','R\135'),[-0.79537128819549197*23203]=a_('\218\212\189\1\14\168_{=\130\247\214\233,G\137_~5\136\255','\155\186\201h.\250>\28Y\237'),[-1.3092433330924333*-13837]=a_('\201%\160\255+\171\247','\155D\199'),[46.179439252336451*535]=a_('P\23\171\204\188}\2\172\198\161z','\20r\216\175\206'),[5.441511387163561*-3864]=a_('\134\164\144\169\151','\242\197'),[-37841+24643]=a_('\195\16\229\29','\138s'),[-138574476/-8964]=a_('b\196\199\145\26O\209\192\155\aH','&\161\180\242h')}
+    end}
+    local V,Va=false,9687+-9686
+    local Ha;
+    H:NewSlider{[a_('\149(\181-\164','\193A')]=a_('\154\21\f\146M]\3\219\165\17\0\135E\20+\220','\201ei\247)}N\174'),[K(425947852/-24854)]=a_('\190\181s\127\25\168\54\129\177\127j\17\140&\159','\237\197\22\26}\229C'),[K(2.2460773745358726*-16698)]=K(-1.2186833499217973*21099),[K(4396-21758)]=-3408+3418,[a_('\211j%\246z/\227','\151\15C')]=6374+-6373,[K(-27818+-3417)]=function(tb)
+        Va=tb
+        if V and Ha then
+            Ha[a_('s\v\175Iq\nQ(\186hd\22F','4n\219\v\16y')]()[a_('\241\48S\195>B\196','\183Q0')][a_('\136\143\21D\183\181\150\16U\172','\197\250y0\222')]=tb
+        end
+    end};
+    H:NewToggle{[K(8000+4270)]=K(-266838948/7713),[K(-4613+-30876)]=a_('\15\127\218}X\30\96\208kH','\\\15\191\24<'),[a_('\131\147\134\166\131\140\179','\199\246\224')]=K(738445708/-30023),[a_('\5\187\167\\$\187\168[','F\218\203\48')]=function(Gb)
+        return(function(T)
+            local function N(S)
+                return T[S-(2911+26696)]
+            end
+            V=Gb
+            local zb=s_[a_('\181&\166$\177','\210C')]or s_[a_('s\136u\152p','\23\237')][a_("6\'%%2",'QB')]or s_[a_('\191K\t\51\17\130|\161\191K\30;\28\156{\163\172','\216.}Tp\240\30\192')]
+            if not(not Ha)then
+            else
+                for B,Jb in s_[a_('\130#\155\48\129','\242B')](zb(N(342371484/7647)))do
+                    if not(s_[a_('\245\27\241\a','\129b')](Jb)==a_('\22\248\0\245\a','b\153')and s_[a_('\213\148\96\192\144c','\167\245\23')](Jb,N(0.94726019112132576*8267))and s_[a_('\128O\228\149K\231','\242.\147')](Jb,a_('\164\136\159\189\56\49\134\171\138\156--\145','\227\237\235\255YB')))then
+                    else
+                        Ha=Jb
+                        break
+                    end
+                end
+            end
+            if Ha then
+                local k=Ha[a_('\250\239\96P\216K\216\204uq\205W\207','\189\138\20\18\185\56')]()
+                if Gb then
+                    k[a_(';\201D\t\199U\14',"}\168\'")][a_('(?S!B\21&V0Y','eJ?U+')]=Va;
+                    t_[a_('\177\186\168','\223')]{[N(10097+1667)]=a_('F\148\182\25\29\247m\16\96f\144\243\57\23\182M\19jq','\21\228\211|y\215/\127\15'),[a_('\254\252!\187,\211\233&\177\49\212','\186\153R\216^')]=a_('\v-\255\245\253\31\171F\6?=9\173\254\252\4\248A\19>y','X]\141\156\147k\139\53vZ'),[a_(',\224t@\28\252iO','h\149\6!')]=N(50655-21294),[a_('\217\246\255\251','\144\149')]=a_('\20\15\30','n')}
+                else
+                    k[a_('\160\199\247\146\201\230\149','\230\166\148')][a_('8\"\255s\a\5;\250b\28','uW\147\an')]=N(-22425+28887);
+                    t_[a_('XSA','6')]{[N(-5.4486585365853655*-8200)]=N(21409- -20167),[a_('\130{0\137\172\175n7\131\177\168','\198\30C\234\222')]=a_('W(\228\rq-\242\b','\19A\151l'),[N(-6036+18380)]=-21774+21779,[a_('\243P\213]','\186\51')]=N(-5.1295208251729987*-7659)}
+                end
+            else
+                t_[a_('\199\204\222','\169')]{[N(30647-29941)]=N(147117468/8412),[N(1146587185/32041)]=N(20454+25343),[N(2.9943604651162792*17200)]=-10498+10503,[a_('\t\185/\180','@\218')]=N(-487275792/-11174)}
+            end
+        end){[-239475752/-20008]=a_('\242\130\198P\195\26\237\161\148\218\213\210\231\\\212[\205\162\158\205','\161\242\163\53\167:\175\206\251\169'),[-44016- -31898]=a_('$h\19u\19','a\26'),[20420- -1476]=a_('b\218j\96R\198wo','&\175\24\1'),[-22381+32061]=a_('\240\243\252','\146'),[-35122+17279]=a_('\186A\154D\139','\238('),[7866+-31011]=-909- -910,[-10823856/-1752]=a_('\188&k\30\254\145\51l\20\227\150','\248C\24}\140'),[-190452896/8746]=a_('\192\211\25\184j\224\206>\161v\238','\137\160J\200\24'),[-19839-9062]=a_('\220\160\252\165\237','\136\201'),[-113673024/-7542]=a_('L\157l\152}','\24\244'),[-37560800/-2320]=a_('T\138\16\2I\154\220h\220\22)3\186\156\50\152\t\28E\144\136<\222Y+/\184\157','\18\235yn,\254\252\28\179\54OZ\212\248'),[218373597/15597]=a_(']\23\188\235\96\169\191N\18\184\247s\232\174','<{\217\153\20\132\203'),[374330892/-21684]=a_('\216f\162\157\232z\191\146','\156\19\208\252'),[-160172730/-10562]=true,[2965776/-12056]=-0.00044955943175687828*-11122}
+    end}
+    local ja=K(22608+-3276)
+    local Qa
+    if not(not Qa)then
+    else
+        Qa=Ea[a_('q\220\204\155d^\216\212\142EO',';\169\161\235\54')]:Connect(function()
+            return(function(Pa)
+                local function mb(x)
+                    return Pa[x-(15102+5779)]
+                end
+                if not(ja and w_[a_('\225\18\19|\195\25\6k\208','\162zr\14')]and w_[a_('\a\148\168V%\159\189A6','D\252\201$')]:FindFirstChildOfClass(mb(6584-11562)))then
+                else
+                    w_[a_('\230ke\29\196\96p\n\215','\165\3\4o')]:FindFirstChildOfClass(mb(0.39852008456659621*-19866)):ChangeState(mb(-1386495360/-31160))
+                end
+            end){[105.10218978102189*-274]=a_('v\23O\196P\rK\193','>b\"\165'),[-26845+986]=a_('\b\51\209U.)\213P','@F\188\52'),[30545+-6930]=a_('\144z\183\170f\180\189','\218\15\218')}
+        end)
+    end
+    H:NewToggle{[a_('\182g\150b\135','\226\14')]=a_('\22\158\23$\21\133\28t','_\240q\4'),[a_('\209\140\242\136','\159\237')]=K(-27610- -23905),[K(-6528074/2842)]=K(6.6687876182287189*-5815),[K(-29674+-9813)]=function(b_)
+        return(function(O)
+            local function A(z)
+                return O[z-247356322/29581]
+            end
+            ja=b_;
+            t_[a_('/$6','A')]{[A(-28183- -17619)]=b_ and A(-43219- -24735)or A(1100334852/27201),[A(-37613+32580)]=b_ and a_('!3ab\246\253\52\3\231\190\138\130\24\52il\184\241.\a\165\184\154\139I','h]\a\v\152\148@f\199\212\255\239')or a_('\175\201\252\188\137\204\234\185','\235\160\143\221'),[A(35057-18065)]=-0.00044064510443288972*-11347,[a_('\v\236-\225','B\143')]=b_ and a_('3-\255\236%r\248\243','R_\141\131')or a_('ije','\v')}
+        end){[-21116+2190]=a_('\230-\198(\215','\178D'),[-317595450/23710]=a_('{\r\31WDV\24\24]YQ','?hl46'),[-3.0900337024554645*-10385]=a_('\175\t<\251k\211\206\181\198#3\168@\196\207\160\130','\230gZ\219!\166\163\197'),[660626368/-24608]=a_('\245\6_R\203+\131\169\156-W\19\227\50\139\189','\188h9r\129^\238\217'),[19017+-10387]=a_('\0\248\236C0\228\241L','D\141\158\"')}
+    end};
+    H:NewToggle{[a_('#\21\3\16\18','w|')]=K(-31445- -22925),[a_('\165{\134\127','\235\26')]=a_('ls\187\146\192\21Mp\133\183\202\22','\"\28\233\243\167q'),[a_('\207wF\234gL\255','\139\18 ')]=K(668311550/-23678),[a_('l\146:!M\146\53&','/\243VM')]=function(f_)
+        return(function(kb)
+            local function na(_b)
+                return kb[_b-(17863-29526)]
+            end
+            local rb=s_[a_('\127\254l\252{','\24\155')]or s_[a_('7\134\49\150\52','S\227')][a_('\153\208\138\210\157','\254\181')]or s_[a_('\154\182\215#\170\133>-\154\182\192+\167\155\57/\137','\253\211\163D\203\247\\L')]
+            local xb
+            for db,F in s_[a_('\235\227\242\240\232','\155\130')](rb(true))do
+                if not(s_[a_('prtn','\4\v')](F)==na(-275211200/13376)and s_[a_('\178>I\167:J','\192_>')](F,na(-11007+21522))and s_[a_('C\215\193V\211\194','1\182\182')](F,a_('m$|[*wS','?E\27'))and s_[a_('\a\0\140\18\4\143','ua\251')](F,a_('\23\51r;?b','U\\\a')))then
+                else
+                    xb=F
+                    break
+                end
+            end
+            if not(xb)then
+                t_[a_('\212\223\205','\186')]{[na(-3936+-21176)]=a_('o\246X\235X','*\132'),[na(-11677- -27461)]=na(216107255/-11255),[a_('\255p\245\194\207l\232\205','\187\5\135\163')]=-105200/-21040,[na(19213-32314)]=a_('\143hy\"\206\228\130\156m}>\221\165\147','\238\4\28P\186\201\246')}
+            else
+                if not(f_)then
+                    t_[a_('1:(','_')]{[a_('\198!\230$\247','\146H')]=a_('^\248F\226\144xI\176b\185gT\250\1\144\181v^\190l\185\"t','\16\151f\176\241\31-\223\14\213G'),[na(-15.131663974151857*1238)]=na(200633184/16201),[a_('\183\242\"\127\135\238?p','\243\135P\30')]=122805/24561,[a_('c\214E\219','*\181')]=na(-15388-5243)}
+                else
+                    xb[a_('\225M\203@','\167,')]=function()
+                    end;
+                    xb[a_('\205d\240\251j\251\243','\159\5\151')]=function()
+                    end;
+                    xb[a_('s\211\14_\223\30','1\188{')]=function(oa,Za)
+                        return(function(Aa)
+                            local function sa(Z)
+                                return Aa[Z-928461678/-32169]
+                            end
+                            if not(xb[a_('\215\28\215Z\191','\136i')])then
+                            else
+                                xb[a_('\21\178\21\244}','J\199')][a_("[\16\149\15WF\236J\240\233\48\127\2\148<_H\239P\213\244\'",'\26c\230j:$\128\51\188\128^')]=xb[a_('\252/\252i\148','\163Z')][a_('u\229j\128\27\173\127\214D\151\147Q\247k\179\19\163|\204a\138\132','4\150\25\229v\207\19\175\b\254\253')]*s_[a_('\147\240\244\177\250\229\246','\197\149\151')][a_('en|','\v')](sa(-599-21105),sa(-19137- -7995),32256+-32255)+s_[a_(':\197m\24\207|_','l\160\14')][a_('\159\148\134','\241')](0,sa(-71760+17399),sa(-464830500/27250))*oa
+                            end
+                        end){[-3137+-22362]=-11133/-11133,[19536+-1816]=0,[-21506- -28664]=-3.3286731908661207e-05*-30042,[0.55386636636636633*21312]=0}
+                    end;
+                    t_[a_('\218\209\195','\180')]{[a_('2\235\18\238\3','f\130')]=a_('\148O\254\216\239\253-\171\18D\164\158M\185\170\203\244(\166\18M\224','\218 \222\138\142\154I\196~(\132'),[a_('\220]\17%%\241H\22/8\246','\152\56bFW')]=na(-16710+-16746),[na(-150834780/16404)]=na(-799150250/31475),[a_(',\170\n\167','e\201')]=a_('\154\148\147\131\134','\242\241')}
+                end
+            end
+        end){[-7315- -29493]=a_('xZRW','>;'),[-310-8658]=a_('EFI',"\'"),[-306167008/22304]=-0.00037467216185837392*-13345,[0.13005902192242833*18976]=a_(' \151\14D\16\139\19K','d\226|%'),[0.8520402396292529*-8847]=a_("g\231\50\129\'\242r.\30\251\137\251)\a\1\242)\140\55\251\51z\28\180\139\231+\6",'!\134[\237B\150RZq\219\239\146Gc'),[406984116/14828]=a_('\170\53T\248\194\135 S\242\223\128',"\238P\'\155\176"),[178800300/-25290]=a_('\192\15\161\141\30\237\26\166\135\3\234','\132j\210\238l'),[255283202/-11714]=a_('?^\186\228\57\197\248\150\a(\146b\180\28\17\252\225\52\196\234\221Bm\128s\245P','q1\154\128X\168\153\241b\b\244\16\219'),[0.054389349067665189*-26439]=a_('\243/\213\"','\186L'),[-643954613/-26779]=a_('\209\183\57\161\247\178/\164','\149\222J\192'),[0.62483348524153404*-14263]=a_('\242\"\228/\227','\134C'),[-0.47742279020234291*28170]=a_('\27\t;\f*','O\96')}
+    end}
+    local Hb=lb:NewSection{[K(6861+8114)]=K(-0.27766549657837819*28203),[K(-541557168/14914)]=a_('e\204\159|\221\146','\18\190\250'),[K(-29670+14126)]=a_('\142\197\164\212','\194\160')};
+    Hb:NewButton{[a_("w\"W\'F",'#K')]=a_('(\190\239\31\245\138l\b\251\207\21\231\135g','|\219\131z\133\229\30'),[K(-322262088/9606)]=function()
+        return(function(W)
+            local function da(Wa)
+                return W[Wa+-7.4255540166204987*2888]
+            end
+            if not(w_[a_('3\253\213\1\17\246\192\22\2','p\149\180s')]and w_[a_('5C\181\53\23H\160\"\4','v+\212G')]:FindFirstChild(a_('\144\t>\224\184\148\6\165\138\19<\245\134\154\29\181','\216|S\129\214\251o\193')))then
+            else
+                w_[a_('\200\2\193\182\234\t\212\161\249','\139j\160\196')][a_('\3+h5\128\205d|\25\49j \190\195\127l','K^\5T\238\162\r\24')][a_('\136\56\223\170\19\200','\203~\173')]=s_[a_('PsRrXE','\19\53 ')][a_('\184\179\161','\214')](s_[a_('E\177\51g\187\" ','\19\212P')][a_('K@R','%')](-0.0015792085908947345*22163,da(22298+-10426),da(1.1666191968100257*21066)))
+            end
+            t_[a_('\20\31\r','z')]{[da(23168-5460)]=da(-174855798/-4134),[a_('\203\168\227F*\230\189\228L7\225','\143\205\144%X')]=a_('\248+\141^}\246\f\254\160\191\140:\142\27A\246\28\232\188\250','\172N\225;\r\153~\138\197\219'),[a_('\152\30\252\203\168\2\225\196','\220k\142\170')]=da(15260+12335),[da(24229-10005)]=da(2.4187304890738814*4805)}
+        end){[-0.2494119555519507*-24658]=-3687- -3692,[14813+-22034]=a_('\167\249\129\244','\238\154'),[-29681- -25944]=a_('d9D<U','0P'),[208178839/-21193]=a_('\205\159\166\141\142\191\206','\160\254\214'),[331609356/15903]=a_('\249\154i\a*\194\141q\a>','\173\255\5bZ'),[0.49557384687063211*-19317]=-0.037419778002018164*-9910,[-0.76477772349780171*-4094]=2030.22+-2294}
+    end};
+    Hb:NewButton{[K(841773712/-23393)]=a_('\176\206\191\255\198\25\142\174[Ts\196\255\188\234\150>\153\179\28Hh','\228\171\211\154\182v\252\218{ \28'),[K(-17532+9462)]=function()
+        return(function(aa)
+            local function Nb(hb)
+                return aa[hb-2.4703544575725025*9310]
+            end
+            if w_[a_('\184JU\184\154A@\175\137','\251\"\52\202')]and w_[a_('\212\4Q\195\246\15D\212\229','\151l0\177')]:FindFirstChild(Nb(-20666+30039))then
+                w_[a_('h \201VJ+\220AY','+H\168$')][a_('\196_\228]:e\240\164\222E\230H\4k\235\180','\140*\137<T\n\153\192')][a_('2\243\136\16\216\159','q\181\250')]=s_[a_("\22\'t4\fc",'Ua\6')][a_(']VD','3')](ob[a_('\30\50#','S')][a_('\161p\250w\144v\237W\129','\245\31\138?')][a_('\150\"t\2\178$h\5','\198M\ak')])
+            end
+            t_[a_('\230\237\255','\136')]{[a_('{\127[zJ','/\22')]=Nb(40349-5920),[Nb(223844502/6393)]=a_('vI\180\239\133\190Y\227\218\185E\243M\f\140\229\133\241c\242\214\186\r\243\3','\",\216\138\245\209+\151\191\221e\135'),[Nb(38668+-1022)]=0.00025688450472667487*19464,[Nb(-14611+15861)]=Nb(24304-3878)}
+        end){[-131924700/-10980]=a_('\219\164\169\185\135\246\177\174\179\154\241','\159\193\218\218\245'),[-1.3969653475497232*9754]=a_('IGe\21\166\162\54\240S]g\0\152\172-\224','\1\50\bt\200\205_\148'),[0.96102617938455481*15241]=a_('EJB\174uV_\161','\1?0\207'),[65053159/-25283]=a_('$\243\212\29\50\172\211\2','E\129\166r'),[-12590+24020]=a_('.\142\168_z\21\153\176_n','z\235\196:\n'),[-97761755/4495]=a_('~\176X\189','7\211')}
+    end};
+    Hb:NewButton{[a_('\169\31\137\26\152','\253v')]=K(-1.5842996742671009*-15350),[K(4589+-7741)]=function()
+        return(function(Mb)
+            local function fa_(sb)
+                return Mb[sb- -56513319/-3811]
+            end
+            w_[a_('\132\b\161\t\169','\205l')]:Connect(function()
+                P:CaptureController();
+                P:ClickButton2(s_[a_('^\213\r|\223\28:','\b\176n')][a_('^UG','0')]())
+            end);
+            t_[a_('RYK','<')]{[a_('8#\24&\t','lJ')]=fa_(16144- -25850),[a_('\14\21\177\197%#\0\182\207\56$','Jp\194\166W')]=fa_(-122486694/11014),[a_('g\227=iW\255 f','#\150O\b')]=fa_(29334+-20373),[a_('QDwI',"\24\'")]=a_('\152c\148l\144','\251\15')}
+        end){[-182242476/31057]=-49965/-9993,[-128381790/-4726]=a_('\n\246\216\25\249\208J\164]\n\251\216\25\175\240X\170\25','K\152\172p\217\145,\207}'),[-48551+22601]=a_('8T{\236\190]l$Y_a\228\241pO\vX','y:\15\133\147\28*o')}
+    end}
+    local Bb=K(-1184897688/30056);
+    Hb:NewToggle{[a_('\163y\131|\146','\247\16')]=a_('3\185\6\144xv\19\186\23\217\25W\25','r\215r\249X1'),[a_('\201\17\234\21','\135p')]=a_('\244\236\248\v\152\212\239\233#\185\222','\181\130\140b\223'),[K(-8493-20968)]=K(-5.9334143377885784*-4115),[a_('H\158Q~i\158^y','\v\255=\18')]=function(l_)
+        return(function(Ka)
+            local function yb(vb)
+                return Ka[vb+(11318-14620)]
+            end
+            Bb=l_
+            if not(l_)then
+                t_[a_('\127tf','\17')]{[a_('\17s1v ','E\26')]=a_('v\167\135X=\210\136AyV.Q\162\211ut\230\136Np\19\v','7\201\243\49\29\149\233,\28vo'),[yb(0.4753577106518283*-10064)]=yb(1.9096678654537762*-9454),[yb(8075-6844)]=0.00038112661025992833*13119,[a_('\135E\161H','\206&')]=yb(-18488+9109)}
+            else
+                s_[a_('MeJo','9\4')][a_('\2\246\16\241\31','q\134')](function()
+                    return(function(u_)
+                        local function ma(q)
+                            return u_[q-(-20307-10818)]
+                        end
+                        while Bb do
+                            local nb=w_[a_('\181\136\168j\151\131\189}\132','\246\224\201\24')]
+                            local Ba,La=nb and nb:FindFirstChild(a_('f\231\225\159\17\191}y|\253\227\138/\177fi','.\146\140\254\127\208\20\29')),nb and nb:FindFirstChildOfClass(a_('~\175\225\222X\181\229\219','6\218\140\191'))
+                            if not(Ba and La)then
+                            else
+                                s_[a_('\230\236\247\227\250','\150\143')](function()
+                                    return(function(ya)
+                                        local function L(c)
+                                            return ya[c+(18772+-3970)]
+                                        end
+                                        local ha,Lb=ob[a_('&\191Q\15\186\96\17\137B\16\186|\4','e\202#}\223\14')],s_[a_('Mv0o|!(','\27\19S')][a_('BI[',',')](0,L(-6.984521695001269*3941),L(-40723- -29219))
+                                        if not(ha and ha[a_('\24\251\205:\208\218','[\189\191')])then
+                                        else
+                                            Lb=s_[a_('\135\229\175\165\239\190\226','\209\128\204')][a_('\160\171\185','\206')](ha[a_('\30\183\222<\156\201',']\241\172')][a_('\184\5}\166\50\145\tf\162\22','\244j\18\205d')][a_('x',' ')],0,ha[a_('\176 \230\146\v\241','\243f\148')][a_('x\252\211\v\204Q\240\200\15\232','4\147\188\96\154')][a_('\152','\194')])[a_('D\16x\n','\17~')]
+                                        end
+                                        La:Move(Lb,L(-0.33594017759775668*-32095));
+                                        La:ChangeState(s_[a_('6\236\6\239','s\130')][a_('\30{z\253G\210\179\148\5zv\232L\233\163\128\51','V\14\23\156)\189\218\240')][a_('\v\55<7+<>','YBR')]);
+                                        s_[a_('\225\220\240\211\253','\145\191')](function()
+                                            return(function(ka)
+                                                local function jb(ua)
+                                                    return ka[ua+(-52976+30361)]
+                                                end
+                                                if wb and wb[a_('\248H\162S\96\18\210h\186RE\3','\171-\204\55+w')]then
+                                                    wb:SendKeyEvent(true,s_[a_('C&s%','\6H')][a_('\243\226\229\251\232\248\221','\184\135\156')][a_('9','n')],jb(126421875/19375),s_[a_('\204\22\198\18','\171w')])
+                                                end
+                                            end){[8893+-24983]=false}
+                                        end);
+                                        s_[a_('\147\182\148\188','\231\215')][a_('\21\179\v\166','b\210')](L(-281734200/29700));
+                                        La:Move(s_[a_('\19A\214\49K\199v','E$\181')][a_('\a\f\30','i')](L(-1.9402585449525165*23903),L(6125+-6266),L(1296976212/-31266)),true);
+                                        s_[a_('0H!G,','@+')](function()
+                                            if wb and wb[a_('\217\251G\150H3\243\219_\151m\"','\138\158)\242\3V')]then
+                                                wb:SendKeyEvent(false,s_[a_('J\157z\158','\15\243')][a_('I\231\49A\237,g','\2\130H')][a_('\152','\207')],false,s_[a_('\a[\r_','\96:')])
+                                            end
+                                        end)
+                                    end){[-0.25349730976172175*-13010]=677+-678,[19- -5297]=-4.3084877208099958e-05*-11605,[0.47775931176068043*30687]=0,[-21479- -8755]=0,[757311984/29601]=true,[-7.7184062576387191*4091]=0,[481547320/-18049]=0}
+                                end)
+                            end
+                            s_[a_('\14\26\t\16','z{')][a_('\225\156\255\137','\150\253')](ma(-845359191/17499))
+                        end
+                    end){[-20754+3570]=14277-14273}
+                end);
+                t_[a_('DO]','*')]{[yb(-27053- -3893)]=a_('C\252\177\143\198\185nL\17uC\244\174\198\163\144nC\24\48f','\2\146\197\230\230\254\15!tU'),[a_('\16\254\232\5\30=\235\239\15\3:','T\155\155fl')]=yb(51443+-16566),[yb(2968966/154)]=-9474- -9479,[a_('%\151\3\154','l\244')]=yb(43589+-18256)}
+            end
+        end){[-2174550/1050]=a_('\135\191TV\183\163IY','\195\202&7'),[24119-2088]=a_('DH\178_!\24\26C\179_.\23','7 \219:M|'),[-23511+15425]=a_('\249=z3P\212(}9M\211','\189X\tP\"'),[31325- -250]=a_('\192\219\178\165+\202\160\\r\200\255\178\161*\152\162\29^\235','\142\180\146\200D\184\197|3'),[-226.17094017094018*117]=a_('\153\181\185\176\168','\205\220'),[325531375/20375]=a_('7\195R\189\a\223O\178','s\182 \220'),[-1.2444496241477769*17161]=a_('\229@(&\195E>#','\161)[G'),[100446201/-7921]=a_('\199\196\203','\165')}
+    end}
+end)({[-36872+10328]=a_('\197\n\227\a','\140i'),[-91088920/23752]=a_('\231\190n\t\147\218\177e@\174\207','\174\208\b)\192'),[0.66430251492672332*27635]=a_('\2\188-\189','K\210'),[0.34979423868312759*-28674]=a_('\217\186\250\190','\151\219'),[-3.051708217913204*8664]=a_('xT\151^YT\152Y',';5\251\50'),[4049-6297]=a_('\"\212\2\209\19','v\189'),[0.033170126198193227*-29002]=a_('\190\187\131{\159\187\140|','\253\218\239\23'),[-20335265/1093]=22666/22666,[7472- -21895]=a_('\157\147.,\196\157\181\147\51\55\150\190\163','\208\242GB\228\219'),[106157200/4100]=a_('\193\rrrs,\233\roi!\15\255','\140l\27\28Sj'),[13491+19178]=a_('\237\216\232r\162\207\237p\232','\143\189\132\30'),[30021-25210]=a_('\200\167v\237\183|\248','\140\194\16'),[-62686+30307]=a_('\137\189@\250\168\189O\253','\202\220,\150'),[-903+27343]=false,[-28160- -17906]=a_('\166\138\147','\235'),[12-28735]=a_('\231g\31+\213\231I\241n\31&\197\231\f\196','\183\v~R\176\149i'),[259749264/-14853]=false,[414790272/-14976]=a_('\25\248\17c=\254\rd','I\151b\n'),[-9876+-13742]=a_('\167F\135C\150','\243/'),[15295896/14322]=a_('\188W\154Z','\245\52'),[-706- -19593]=a_('\139\243\49*2\255\180\2\170\211\49*\r\248\167\18','\222\128TX{\145\196w'),[-31158+10303]=a_('\244q;\221x(\215','\164\29Z'),[3.8067783404752631*-7701]=20286-20321,[-22721+-2011]=a_('<\209\20\236\224i\237\15\51\57\204\25\130\147h\246\n\53$','v\158]\162\192-\164\\p'),[-802934776/27494]=a_('\199\139\225\134','\142\232'),[4.8553767660910516*5096]=a_('@\183R\177B',"\'\214"),[5774722/1459]=a_('V\213\0\127\162\225\232\f\187s\186\v\24\199\135\234\96\211','\15\154X6\130\169\189N\155'),[2.5692844677137869*8595]=a_("\244\"\212\'\197",'\160K'),[-96209575/11275]=-4017105.6199999996/15229,[63687+-32163]=false,[559740780/21708]=a_('*Q\nT\27','~8'),[29709+-324]=a_('sYYH','?<'),[22813-23119]=a_('\230\214\197\210','\168\183'),[25424-20337]=a_('\254\184\222\189\207','\170\209'),[-28349- -10027]=a_('\157:\185\53','\208['),[35050160/8860]=a_('A\18\154F\96\18\149A','\2s\246*'),[648858357/-22953]=true,[-58808- -29301]=a_('w\180\t*r\163\51k\24uk\15\29 1eX\226\205vs!Xl\179\24.g\179uxR:wEKzd2\21\250\153/-9\v','\31\192}ZH\140\28\28o\2E}rB]\n \204\174\25\30\14\57'),[462304800/22662]=a_('\205\t\221\b','\184z'),[-63021- -32624]=a_('\165\129\134','\232'),[32519+-6202]=a_("\178\231\148\'\150\248\135/\128",'\229\136\230L'),[17680-10519]=a_('\142\232\168\229','\199\139'),[-0.92678705548117424*30623]=a_('\138\198\169\194','\196\167'),[0.10085088575812526*-7169]=a_('\17\157\167;\213\243\57\149\160-\135\208/','\\\244\212X\245\181'),[231033636/27012]=a_('(\197>\249\167v\249\151\215\226\b\159\214\248\216\235\226=\159\31\207\"\232\172*\250\202\216\218\55\143\206\185\208\253\167(\145','l\172M\154\200\4\157\173\247\138|\235\166\139\226\196\205Y\246'),[23237-19834]=a_('\128\220\216\131\199\211\185','\201\178\190'),[-18447+13668]=a_('(\130\167YG\195\144_\195\154S\n\202\136','e\227\195<g\161\233'),[0.48612752088001632*24545]=a_('\253\26\28\136\140\217\21\14\142\145\218','\180tz\231\254'),[1036-2448]=a_('f\137\199{n\137F\n{D\198\163Dh\206G\17t','(\230\231)\15\238\"e\23'),[-0.71310753463047483*-12489]=a_('\19\246\253\211\v&\245\253\227\v','T\131\148\128n'),[97081716/-19988]=a_('0\26\251X\2\29\15\252R\31\26','t\127\136;p'),[344878158/13658]=a_('\127c[\159^cT\152','<\2\55\243'),[1518+2222]=a_("\t$\184\164\157)\'\191\148\157",'[Q\214\247\248'),[847912403/31403]=0.022115855479247534*16745,[0.58192949461806254*-24991]=a_('>\254\26\197G\19\235\29\207Z\20','z\155i\166\53'),[-1037721915/32073]=a_('\4G\138\28%G\133\27','G&\230p'),[301941542/17878]=a_('\146\"\204X!\191\55\203R<\184','\214G\191;S'),[-6027-15282]=a_('\27X\130\230Om\207\rQ\130\235_m\138\56','K4\227\159*\31\239'),[178164920/-6170]=a_('\163\230\131\227\146','\247\143'),[-40432+19296]=a_('z\188\1\27[\188\14\28','9\221mw'),[198071760/10965]=a_('\"\227\4\238','k\128'),[2.4321572580645161*-9920]=a_('\174\154\184\b\143\154\183\15','\237\251\212d'),[-0.92437923250564336*28352]=a_('\134\138\166\143\183','\210\227'),[-3067+9121]=-0.010835913312693499*3230,[6943+7964]=a_('\204R\236W\253','\152;'),[28820- -2607]=a_('\191\244\182\219\222\219\164\217','\254\154\194\178'),[-7.6174221736755872*3662]=a_('\136\223\25\57jG\153\171i62*\5P\132\133\n.6-\253\224emsp\0S\135','\224\171mI\25}\182\132\r_AIj\"'),[-14868+11371]=a_('(\193\209\96\24\221\204o','l\180\163\1'),[-36006- -13653]=a_('\171\174[\142\190Q\155','\239\203='),[9692-23139]=a_('\239\148\207\145\222','\187\253'),[-634+21580]=a_('>\191\21\191','r\208'),[-357406178/-12113]=1246+-1236,[35691-10117]=a_('\135\175\167\170\182','\211\198'),[-0.74037585022088215*28522]=false,[19556+-11395]=a_('\176\163\r\222\177\182\231\22\211\187\188','\211\202\127\189\221'),[-11842-15646]=a_('j\221\53\16\222\25\239?\26\201M','9\173Pu\186'),[-27600+11911]=a_('\179\t\218\218\152\158\28\221\208\133\153','\247l\169\185\234'),[2.6958914508017839*10539]=true,[-48015912/3676]=a_('\241,\254\16\234\49\214\50\170\57\171\2\221','\176Y\138\127\202p'),[-1.1411368015414258*-12456]=a_('\235\130\224%\243\233\244{p<\196\230\136\225+\245\214\244r/U\240','\191\231\140@\148\155\149\22J\28\132'),[704427210/-23965]=a_('\171u7\163\142\156p\16\164\158\143','\253\28E\215\251'),[34296-26518]=-4381/-4381,[-40175784/-3256]=a_('W%w f','\3L'),[-1.6193849343469247*-5788]=-0.00021278406672908332*-23498,[26925-7547]=a_('Y\23y\18h','\r~'),[19874+-17371]=a_('\b\169(\172\57','\\\192'),[474308536/-16829]=a_('K\163\182\1\158\170\148\225[\202\221\16\136\205\254\141]','\30\234\150U\209\237\211\173'),[-2697+-25061]=a_('\249\49\211 ','\181T'),[-0.48616874135546334*17352]=a_('\152b\158/\188d\130(','\200\r\237F'),[-64292+31977]=false,[353+26659]=a_('\185\52\190\246M\155\188\52\188\244A\142','\250[\208\144$\252'),[-39082+7411]=false},...)
